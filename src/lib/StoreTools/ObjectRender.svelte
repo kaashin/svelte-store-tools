@@ -26,6 +26,8 @@
     {:else if typeof property.value === "object" && property.value.length}
       <li>{property.key}: Array({property.value.length})</li>
       <svelte:self object={property.value} />
+    {:else if typeof property.value === "function"}
+      <li>{property.key}: Function</li>
     {:else}
       <li>{property.key}: {property.value}</li>
     {/if}

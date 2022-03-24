@@ -11,5 +11,9 @@ export const ObjectStore = writable({
     {
       name: 'test'
     }
-  ]
+  ],
+  testFunction: () => {
+    console.log('test');
+    console.log('show more');
+  }
 })
