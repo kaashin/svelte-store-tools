@@ -19,6 +19,7 @@
   },
   "type": "module",
   "dependencies": {
+    "lodash": "^4.17.21",
     "uid": "^2.0.0"
   }
 }

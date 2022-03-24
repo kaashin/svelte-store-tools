@@ -2,7 +2,9 @@
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
   import { Stores } from './store.js'
-  import StoreTest from './StoreTest.svelte';
+  import StoreRender from './StoreRender.svelte';
+
+  export let height = "200px" 
 
   let storeArr = [];
 
@@ -23,11 +25,11 @@
   }
 </style>
 
-<div class="store-tools__container">
+<div class="store-tools__container" style={`height: ${height}`}>
   Store Tools!
 
   {#each $Stores as store (store.id)}
     <p>{store.name}</p>
-    <StoreTest store={store.store} />
+    <StoreRender store={store.store} />
   {/each}
 </div>

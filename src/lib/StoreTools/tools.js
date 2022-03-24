@@ -23,3 +23,7 @@ export const register = (name, store) => {
     }])
   }
 }
+
+export const clear = () => {
+  Stores.set([])
+}

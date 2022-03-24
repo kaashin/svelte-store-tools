@@ -1,13 +1,18 @@
 <script>
-  import { SimpleStore } from '$stores/store.js'
-  import { StoreTools, register } from '$lib/StoreTools'
-  import { onMount } from 'svelte'
+  import { SimpleStore, ObjectStore } from '$stores/store.js'
+  import { StoreTools, register, clear } from '$lib/StoreTools'
+  import { onDestroy, onMount } from 'svelte'
 
 
   // On mount, register the stores;
   onMount(() => {
     register('Simple Store', SimpleStore);
+    register('Object Store', ObjectStore);
   })
+
+  onDestroy(() => {
+    clear();
+  });
 
   function increment () {
     $SimpleStore++;
@@ -23,4 +28,4 @@
   <button on:click={increment}>Increment</button>
 </div>
 
-<StoreTools />
+<StoreTools height="50%" />
