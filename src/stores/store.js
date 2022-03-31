@@ -12,6 +12,7 @@ export const ObjectStore = writable({
       name: 'test'
     }
   ],
+  boolean: false,
   testFunction: () => {
     console.log('test');
     console.log('show more');

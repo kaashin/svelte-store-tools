@@ -16,7 +16,7 @@
 {#if storeType === "object"}
   <div>
     Show object
-    <ObjectRender object={$store}/>
+    <ObjectRender bind:object={$store}/>
   </div>
 {:else}
   <div>
