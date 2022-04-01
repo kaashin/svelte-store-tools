@@ -1,4 +1,5 @@
 <script>
+  import ArrayRender from './ArrayRender.svelte';
   export let object;
 
   let displayArr;
@@ -6,7 +7,7 @@
   function parseObject(obj) {
     const newArr = []
     for (const key in obj) {
-      newArr.push({ key, value: obj[key] })
+      newArr.push({ key, value: obj[key]})
     }
     displayArr = [...newArr]  
   }
@@ -28,34 +29,48 @@
 </script>
 
 <style>
-  ul {
-    list-style-type: none;
-    padding-left: 1rem;
+  input {
+    background-color: rgb(39, 39, 39);
+    border: 0;
+    color: rgb(226,226,226);
+    font-family: 'Lucida Console', Consolas, monospace;
   }
-  ul li {
+
+  select {
+    background-color: rgb(39, 39, 39);
+    border: 0;
+    color: rgb(226,226,226);
+    font-family: 'Lucida Console', Consolas, monospace;
+  }
+  .object {
     padding-left: 1rem;
   }
 </style>
 
-<ul>
+<div class="object">
   {#each displayArr as property}
     {#if typeof property.value === "object" && !property.value.length}
-      <li>{property.key}: Object </li>
+      <div>{property.key}: {"{"} </div>
       <svelte:self bind:object={property.value} />
-    {:else if typeof property.value === "object" && property.value.length}
-      <li>{property.key}: Array({property.value.length})</li>
-      <svelte:self bind:object={property.value} />
+      {"}"}
+    {:else if typeof property.value === "object" && Array.isArray(property.value)}
+      <div>{property.key}: Array({property.value.length})</div>
+      <ArrayRender bind:arr={property.value} />
     {:else if typeof property.value === "function"}
-      <li>{property.key}: Function</li>
+      <div>{property.key}: Function</div>
     {:else if typeof property.value === "boolean"}
-      {property.key}: 
-      <select bind:value={property.value}>
-        <option value={true}>true</option>
-        <option value={false}>false</option>
-      </select>
+      <div>
+        {property.key}: 
+        <select bind:value={property.value}>
+          <option value={true}>true</option>
+          <option value={false}>false</option>
+        </select>
+      </div>
+    {:else if typeof property.value === "number"}
+      <div>{property.key}: <input bind:value={property.value} type="number"/></div>
     {:else}
       <!-- <li>{property.key}: {property.value}</li> -->
-      <li>{property.key}: <input bind:value={property.value} /></li>
+      <div>{property.key}: <span contenteditable bind:innerHTML={property.value} /></div>
     {/if}
   {/each}
-</ul>
+  </div>

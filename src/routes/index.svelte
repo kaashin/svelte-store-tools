@@ -1,5 +1,5 @@
 <script>
-  import { SimpleStore, ObjectStore } from '$stores/store.js'
+  import { SimpleStore, ObjectStore, ArrayStore } from '$stores/store.js'
   import { StoreTools, register, clear } from '$lib/StoreTools'
   import { onDestroy, onMount } from 'svelte'
 
@@ -7,6 +7,7 @@
   // On mount, register the stores;
   onMount(() => {
     register('Simple Store', SimpleStore);
+    register('Array Store', ArrayStore);
     register('Object Store', ObjectStore);
   })
 
