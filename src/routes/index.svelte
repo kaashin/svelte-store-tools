@@ -3,12 +3,18 @@
   import { StoreTools, register, clear } from '$lib/StoreTools'
   import { onDestroy, onMount } from 'svelte'
 
+  const badStore = 'this is a bad store';
 
   // On mount, register the stores;
   onMount(() => {
     register('Simple Store', SimpleStore);
     register('Array Store', ArrayStore);
     register('Object Store', ObjectStore);
+    register('Bad Store', badStore);
+    register('Bad Store', badStore);
+    register('Bad Store', badStore);
+    register('Bad Store', badStore);
+    register('Bad Store', badStore);
   })
 
   onDestroy(() => {

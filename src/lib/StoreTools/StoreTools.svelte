@@ -8,6 +8,7 @@
   export let height = "200px" 
 
   let storeArr = [];
+  let selectedStoreIndex;
 
   onMount(() => {
     window.stores = [];
@@ -16,18 +17,27 @@
   function toggleOpen() {
     $ContainerStore.isOpen = !$ContainerStore.isOpen;
   }
+
+  function setActiveStore(storeId) {
+    selectedStoreIndex = $Stores.findIndex(store => store.id === storeId);
+    console.log(selectedStoreIndex);
+  }
+
+  $: console.log($Stores[selectedStoreIndex]?.isValid)
+
 </script>
 
 <style>
   .store-tools__container {
     position: fixed;
     bottom: 0;
-    height: 200px;
+    min-height: 200px;
     width: 100%;
-    padding: 1rem;
     background-color: rgb(39, 39, 39);
     color: rgb(226, 226, 226);
     font-family: "Segoe UI", "San Francisco", "Open Sans", Tahoma, Geneva, sans-serif;
+    overflow-y: auto;
+    display: flex;
   }
   .store-tools__tab {
     position: fixed;
@@ -56,13 +66,50 @@
     width: 1rem;
     margin-right: 0.4rem;
   }
+
+  .store-list {
+    min-width: 200px;
+    border: solid 1px rgb(60,60,60);
+  }
+  .store-list__item {
+    padding: 0.4rem;
+    cursor: pointer;
+    
+    border-bottom: solid 1px rgb(60,60,60);
+  }
+
+  .store-list__item.active { 
+    background-color: rgb(60, 60, 60)
+  }
+
+  .store-details {
+    padding: 0.5rem;
+    width: 100%;
+  }
 </style>
 {#if $ContainerStore.isOpen}
   <div class="store-tools__container" style={`height: ${height}`} transition:fade={{duration: 150}}>
-    {#each $Stores as store (store.id)}
-      <p>{store.name}</p>
-      <StoreRender store={store.store} />
-    {/each}
+    <div class="store-list">
+      {#each $Stores as store, index (store.id)}
+        <div 
+          class="store-list__item" on:click={()=>setActiveStore(store.id)}
+          class:active={index === selectedStoreIndex}
+        >
+          {store.name}
+        </div>  
+      {/each}
+    </div>
+    <div class="store-details">
+      {#if selectedStoreIndex >= 0}
+       {#if $Stores[selectedStoreIndex]?.isValid}
+          <StoreRender store={$Stores[selectedStoreIndex]?.store} />
+        {:else}
+          <p>Error: This doesn't appear to be a valid svelte store</p>
+        {/if}
+      {:else}
+        <p>Select a store</p>
+      {/if}
+    </div>
   </div>
 {/if}
   <div class="store-tools__tab" on:click={toggleOpen}>

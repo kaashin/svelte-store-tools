@@ -3,9 +3,7 @@
   import ObjectRender from './ObjectRender.svelte';
   import ArrayRender from './ArrayRender.svelte';
   export let store;
-
-  let storeType = getStoreType (store);
-  
+ 
   function getStoreType (currentStore) {
     const type = typeof get(currentStore);
     // Check if it happens to be an array
@@ -15,8 +13,9 @@
       return type;
     }
   }
-
   
+  $: console.log({$store})
+  $: storeType = getStoreType (store);
 </script>
 
 <style>
@@ -79,3 +78,4 @@
     </div>
   {/if}
 </div>
+

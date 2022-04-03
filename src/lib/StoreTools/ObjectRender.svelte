@@ -76,6 +76,7 @@
   }
   .object {
     padding-left: 1rem;
+    width: 100%;
   }
 
   .object > div {
