@@ -5,9 +5,27 @@
   import { Stores, ContainerStore } from './store.js'
   import StoreRender from './StoreRender.svelte';
 
-  export let height = "200px" 
+  let height = 500
 
   let selectedStoreIndex;
+  let containerEl;
+  let resizeHandle = {
+    isMouseDown: false,
+    isMouseDragging: false,
+    yStart: 0,
+    yDistance: 0,
+    prevHeight: height,
+  }
+
+  onMount(() => {
+    window.addEventListener('mouseup', () => {
+      console.log('global mouse up!')
+      resizeHandle.isMouseDown = false;
+      resizeHandle.isMouseDragging = false;
+      resizeHandle.prevHeight = resizeHandle.prevHeight - resizeHandle.yDistance;
+      resizeHandle.yDistance = 0;
+    })
+  })
 
   function toggleOpen() {
     $ContainerStore.isOpen = !$ContainerStore.isOpen;
@@ -16,7 +34,38 @@
   function setActiveStore(storeId) {
     selectedStoreIndex = $Stores.findIndex(store => store.id === storeId);
   } 
+  
+  function resizeMouseDown(e) {
+    resizeHandle.isMouseDown = true;
+    resizeHandle.yStart = e.clientY;
+    
+    console.log({
+      containerY: containerEl.getBoundingClientRect().y,
+      client: e.clientY,
+    })
+  }
 
+  function resizeMouseMove(e) {
+    console.log('isMouseDown', resizeHandle.isMouseDown)
+    if (resizeHandle.isMouseDown) {
+      e.stopPropagation();
+      e.preventDefault();
+      
+      resizeHandle.yDistance = e.pageY - resizeHandle.yStart;
+      
+      const newHeight = resizeHandle.prevHeight - resizeHandle.yDistance;
+      
+      containerEl.style.height = `${newHeight}px`;
+    }
+  }
+
+  function resizeMouseUp(e) {
+    console.log('stop dragging')
+    resizeHandle.isMouseDown = false;
+    resizeHandle.isMouseDragging = false;
+    resizeHandle.prevHeight = resizeHandle.prevHeight - resizeHandle.yDistance;
+    resizeHandle.yDistance = 0;
+  }
 </script>
 
 <style>
@@ -29,6 +78,9 @@
     color: rgb(226, 226, 226);
     font-family: "Segoe UI", "San Francisco", "Open Sans", Tahoma, Geneva, sans-serif;
     overflow-y: auto;
+  }
+
+  .store-tools__wrapper {
     display: flex;
   }
   .store-tools__tab {
@@ -78,29 +130,58 @@
     padding: 0.5rem;
     width: 100%;
   }
+
+  .store-tools__resize-handler {
+    width: 100%;
+    height: 500px;
+    transition: all 0.2s ease-in-out;
+    position: absolute;
+    margin-top: 0px;
+    z-index: 100000
+  }
+
+  .store-tools__resize-handler>div {
+    height: 10px;
+    z-index: 10;
+  }
+
+  .store-tools__resize-handler >div:hover {
+    background-color: rgb(79, 216, 226);
+    cursor: row-resize;
+  }
 </style>
 {#if $ContainerStore.isOpen}
-  <div class="store-tools__container" style={`height: ${height}`} transition:fade={{duration: 150}}>
-    <div class="store-list">
-      {#each $Stores as store, index (store.id)}
-        <div 
-          class="store-list__item" on:click={()=>setActiveStore(store.id)}
-          class:active={index === selectedStoreIndex}
-        >
-          {store.name}
-        </div>  
-      {/each}
+  <div class="store-tools__container" style={`height: ${resizeHandle.prevHeight}px`} transition:fade={{duration: 150}} bind:this={containerEl}>
+    <div 
+      class="store-tools__resize-handler"
+      on:mousemove={resizeMouseMove}
+      on:mousedown={resizeMouseDown}
+      on:mouseup={resizeMouseUp}
+    >
+      <div></div>
     </div>
-    <div class="store-details">
-      {#if selectedStoreIndex >= 0}
-       {#if $Stores[selectedStoreIndex]?.isValid}
-          <StoreRender store={$Stores[selectedStoreIndex]?.store} />
+    <div class="store-tools__wrapper">
+      <div class="store-list">
+        {#each $Stores as store, index (store.id)}
+          <div 
+            class="store-list__item" on:click={()=>setActiveStore(store.id)}
+            class:active={index === selectedStoreIndex}
+          >
+            {store.name}
+          </div>  
+        {/each}
+      </div>
+      <div class="store-details">
+        {#if selectedStoreIndex >= 0}
+         {#if $Stores[selectedStoreIndex]?.isValid}
+            <StoreRender store={$Stores[selectedStoreIndex]?.store} />
+          {:else}
+            <p>Error: This doesn't appear to be a valid svelte store</p>
+          {/if}
         {:else}
-          <p>Error: This doesn't appear to be a valid svelte store</p>
+          <p>Select a store</p>
         {/if}
-      {:else}
-        <p>Select a store</p>
-      {/if}
+      </div>   
     </div>
   </div>
 {/if}

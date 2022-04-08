@@ -91,7 +91,7 @@
 
 <div class="object">
   {#each displayArr as property}
-    {#if typeof property.value === "object" && !property.value.length}
+    {#if typeof property.value === "object" && !property?.value?.length}
       <div class="line"><span class="property-name">{property.key}</span>: {"{"} </div>
         <div>
           <svelte:self bind:object={property.value} />
