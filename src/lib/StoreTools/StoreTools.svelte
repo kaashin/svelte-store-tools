@@ -7,12 +7,7 @@
 
   export let height = "200px" 
 
-  let storeArr = [];
   let selectedStoreIndex;
-
-  onMount(() => {
-    window.stores = [];
-  })
 
   function toggleOpen() {
     $ContainerStore.isOpen = !$ContainerStore.isOpen;
@@ -20,10 +15,7 @@
 
   function setActiveStore(storeId) {
     selectedStoreIndex = $Stores.findIndex(store => store.id === storeId);
-    console.log(selectedStoreIndex);
-  }
-
-  $: console.log($Stores[selectedStoreIndex]?.isValid)
+  } 
 
 </script>
 
