@@ -25,6 +25,8 @@
       resizeHandle.prevHeight = resizeHandle.prevHeight - resizeHandle.yDistance;
       resizeHandle.yDistance = 0;
     })
+
+    window.addEventListener('mousemove', resizeMouseMove);
   })
 
   function toggleOpen() {
@@ -133,19 +135,13 @@
 
   .store-tools__resize-handler {
     width: 100%;
-    height: 500px;
+    height: 10px;
     transition: all 0.2s ease-in-out;
     position: absolute;
     margin-top: 0px;
     z-index: 100000
   }
-
-  .store-tools__resize-handler>div {
-    height: 10px;
-    z-index: 10;
-  }
-
-  .store-tools__resize-handler >div:hover {
+  .store-tools__resize-handler:hover {
     background-color: rgb(79, 216, 226);
     cursor: row-resize;
   }
@@ -154,11 +150,8 @@
   <div class="store-tools__container" style={`height: ${resizeHandle.prevHeight}px`} transition:fade={{duration: 150}} bind:this={containerEl}>
     <div 
       class="store-tools__resize-handler"
-      on:mousemove={resizeMouseMove}
       on:mousedown={resizeMouseDown}
-      on:mouseup={resizeMouseUp}
     >
-      <div></div>
     </div>
     <div class="store-tools__wrapper">
       <div class="store-list">
