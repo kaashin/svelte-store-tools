@@ -19,14 +19,14 @@
 
   onMount(() => {
     window.addEventListener('mouseup', () => {
-      console.log('global mouse up!')
       resizeHandle.isMouseDown = false;
       resizeHandle.isMouseDragging = false;
       resizeHandle.prevHeight = resizeHandle.prevHeight - resizeHandle.yDistance;
       resizeHandle.yDistance = 0;
+      window.removeEventListener('mousemove', resizeMouseMove);
     })
 
-    window.addEventListener('mousemove', resizeMouseMove);
+    // window.addEventListener('mousemove', resizeMouseMove);
   })
 
   function toggleOpen() {
@@ -41,10 +41,7 @@
     resizeHandle.isMouseDown = true;
     resizeHandle.yStart = e.clientY;
     
-    console.log({
-      containerY: containerEl.getBoundingClientRect().y,
-      client: e.clientY,
-    })
+    window.addEventListener('mousemove', resizeMouseMove);
   }
 
   function resizeMouseMove(e) {
@@ -60,14 +57,6 @@
       containerEl.style.height = `${newHeight}px`;
     }
   }
-
-  function resizeMouseUp(e) {
-    console.log('stop dragging')
-    resizeHandle.isMouseDown = false;
-    resizeHandle.isMouseDragging = false;
-    resizeHandle.prevHeight = resizeHandle.prevHeight - resizeHandle.yDistance;
-    resizeHandle.yDistance = 0;
-  }
 </script>
 
 <style>
@@ -80,6 +69,7 @@
     color: rgb(226, 226, 226);
     font-family: "Segoe UI", "San Francisco", "Open Sans", Tahoma, Geneva, sans-serif;
     overflow-y: auto;
+    padding-top: 10px;
   }
 
   .store-tools__wrapper {
@@ -138,7 +128,7 @@
     height: 10px;
     transition: all 0.2s ease-in-out;
     position: absolute;
-    margin-top: 0px;
+    top: 0;
     z-index: 100000
   }
   .store-tools__resize-handler:hover {
