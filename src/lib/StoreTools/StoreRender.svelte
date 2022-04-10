@@ -2,6 +2,7 @@
   import { get } from 'svelte/store';
   import ObjectRender from './ObjectRender.svelte';
   import ArrayRender from './ArrayRender.svelte';
+  import DisplayRow from './DisplayRow.svelte';
   export let store;
  
   function getStoreType (currentStore) {
@@ -39,7 +40,7 @@
   }
 
   .basic-store {
-    padding-left: 1rem;
+    
   }
 </style>
 
@@ -54,8 +55,9 @@
     </div>
   {:else if storeType === "number"}
     <div class="basic-store">
-      <p>Type: <span>{storeType}</span></p>
-      <p>Value: <input bind:value={$store} type="number" /></p>
+      <DisplayRow key="Value" bind:value={$store}/>
+      <!-- <p>Type: <span>{storeType}</span></p>
+      <p>Value: <input bind:value={$store} type="number" /></p> -->
     </div>
   {:else if storeType === "boolean"}
     <div class="basic-store">
@@ -71,10 +73,11 @@
     </div>
   {:else}
     <div class="basic-store">
-      <div>
+      <DisplayRow key="Value" bind:value={$store}/>
+      <!-- <div>
         <p>Type: <span>{storeType}</span></p>
         <p>Value: <input bind:value={$store} type="text" /></p>
-      </div>
+      </div> -->
     </div>
   {/if}
 </div>

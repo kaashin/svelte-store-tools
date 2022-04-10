@@ -119,7 +119,6 @@
   }
 
   .store-details {
-    padding: 0.5rem;
     width: 100%;
   }
 
