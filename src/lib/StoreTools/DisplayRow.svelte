@@ -25,6 +25,13 @@
     outline: none;
   }
 
+  select {
+    background-color: rgb(39, 39, 39);
+    border: 0;
+    color: rgb(226,226,226);
+    font-family: 'Lucida Console', Consolas, monospace;
+  }
+
   [contenteditable] {
     background-color: rgb(39, 39, 39);
   }
@@ -41,6 +48,7 @@
   .row {
     display: flex;
     /* border-bottom: solid 1px rgb(60,60,60); */
+    /* padding-left: 1rem; */
     padding-top: 0.3rem;
     padding-bottom: 0.2rem;
     font-size: 0.8rem;
@@ -48,7 +56,6 @@
   }
 
   .key {
-    padding-left: 1rem;
     padding-right: 1ex;
   }
 
@@ -58,9 +65,7 @@
 
 </style>
 
-<div 
-  class="row"
->
+<div class="row">
   {#if $$props.key != null || $$props.key != undefined}
     <span class="key">
       {key}:
@@ -75,10 +80,15 @@
       {:else if typeof value === "number"}
         <input bind:value={value} type="number" />
       {:else if typeof value === "boolean"}
-        <input bind:value={value} type="checkbox" />
+        <select bind:value={value}>
+          <option value={true}>true</option>
+          <option value={false}>false</option>
+        </select>
       {:else if typeof value === "string"}
         <!-- <input bind:value={value} type="text" /> -->
         <span contenteditable bind:innerHTML={value} />
+      {:else if typeof value === "function"}
+        <span>Function</span>
       {:else}
         <span>{value}</span>
       {/if}

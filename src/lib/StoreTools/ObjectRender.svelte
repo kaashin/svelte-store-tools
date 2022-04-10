@@ -7,6 +7,7 @@
   export let object;
   export let open = false;
   export let tabIndex = 0;
+  export let key;
 
   let displayArr;
 
@@ -95,6 +96,7 @@
 
   .object-block {
     display: flex;
+    margin-top: -0.2rem;
     padding-top: 0.2rem;
     padding-left: 0.4rem;
     padding-right: 0.4rem;
@@ -117,52 +119,34 @@
   }
 
   .object-content {
-
+    padding-left: 1rem;
   }
 
-  .pl-1 {
+  .init-left-pad {
     padding-left: 1rem;
   }
 
 </style>
 
-<div 
-  class="object"
-  class:pl-1={tabIndex===0}
->
-  <DisplayRow>
-    <div class="object-block" slot="custom" on:click={() => {open = !open}}>
-      <span class="chevron">
-        <Chevron direction={open ? "down" : "right"}/>
-      </span>
-      Object
-    </div>
-  </DisplayRow>
-  {#if open}
-    <div class="object-content" transition:slide={{duration: 200}}>
-      {#each displayArr as property}
-        {#if typeof property.value === "object" && !property?.value?.length}
-          <DisplayRow key={property.key} tabIndex={tabIndex}>
-            <svelte:self bind:object={property.value} tabIndex={tabIndex+1} slot="custom"/>
-          </DisplayRow>
-        {:else if typeof property.value === "object" && Array.isArray(property.value)}
-          <DisplayRow key={property.key} tabIndex={tabIndex}>
-            <ArrayRender bind:arr={property.value} slot="custom"/>
-          </DisplayRow>
-        {:else if typeof property.value === "function"}
-          <div class="line"><span class="property-name">{property.key}</span>: Function</div>
-        {:else if typeof property.value === "boolean"}
-          <div class="line">
-            <span class="property-name">{property.key}: </span>
-            <select bind:value={property.value}>
-              <option value={true}>true</option>
-              <option value={false}>false</option>
-            </select>
-          </div>
-        {:else}
-          <DisplayRow key={property.key} bind:value={property.value} tabIndex={tabIndex}/>
-        {/if}
-      {/each}
-    </div>
-  {/if}
-</div>
+<DisplayRow key={key} tabIndex={tabIndex}>
+  <div class="object-block" slot="custom" on:click={() => {open = !open}}>
+    <span class="chevron">
+      <Chevron direction={open ? "down" : "right"}/>
+    </span>
+    Object
+  </div>
+</DisplayRow>
+
+{#if open}
+  <div class="object-content" transition:slide={{duration: 200}}>
+    {#each displayArr as property}
+      {#if typeof property.value === "object" && !property?.value?.length}
+        <svelte:self bind:object={property.value} key={property.key} tabIndex={tabIndex+1} slot="custom"/>
+      {:else if typeof property.value === "object" && Array.isArray(property.value)}
+        <ArrayRender bind:arr={property.value} key={property.key} slot="custom" tabIndex={tabIndex+1}/>
+      {:else}
+        <DisplayRow key={property.key} bind:value={property.value} tabIndex={tabIndex+1}/>
+      {/if}
+    {/each}
+  </div>
+{/if}

@@ -120,6 +120,7 @@
 
   .store-details {
     width: 100%;
+    padding: 0rem 1rem;
   }
 
   .store-tools__resize-handler {

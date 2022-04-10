@@ -38,47 +38,15 @@
   .render-store p {
     margin: 0;
   }
-
-  .basic-store {
-    
-  }
 </style>
 
 <div class="render-store">
   {#if storeType === "object"}
-    <div>
-      <ObjectRender bind:object={$store}/>
-    </div>
+    <ObjectRender bind:object={$store}/>
   {:else if storeType === "array"}
-    <div>
-      <ArrayRender bind:arr={$store} />
-    </div>
-  {:else if storeType === "number"}
-    <div class="basic-store">
-      <DisplayRow key="Value" bind:value={$store}/>
-      <!-- <p>Type: <span>{storeType}</span></p>
-      <p>Value: <input bind:value={$store} type="number" /></p> -->
-    </div>
-  {:else if storeType === "boolean"}
-    <div class="basic-store">
-      <div>
-        <p>Type: <span>{storeType}</span></p>
-        <p>Value: 
-          <select bind:value={$store}>
-            <option value={true}>true</option>
-            <option value={false}>false</option>
-          </select>
-        </p>
-      </div>
-    </div>
+    <ArrayRender bind:arr={$store} />    
   {:else}
-    <div class="basic-store">
-      <DisplayRow key="Value" bind:value={$store}/>
-      <!-- <div>
-        <p>Type: <span>{storeType}</span></p>
-        <p>Value: <input bind:value={$store} type="text" /></p>
-      </div> -->
-    </div>
+    <DisplayRow key="Value" bind:value={$store}/>
   {/if}
 </div>
 
