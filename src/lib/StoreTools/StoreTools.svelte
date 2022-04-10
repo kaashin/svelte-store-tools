@@ -80,12 +80,13 @@
     position: fixed;
     z-index: 9999;
     display: flex;
-
+    font-family: "Segoe UI", "San Francisco", "Open Sans", Tahoma, Geneva, sans-serif;
+    font-size: 0.9rem;
     align-items: center;
     bottom: 0;
     right: 2rem;
     height: 1rem;
-    background-color: rgb(10, 57, 85);
+    background-color:  rgb(77, 77, 77);
     color: rgb(226,226,226);
     padding: 0.5rem;
     border-radius: 0.4rem 0.4rem 0 0;
@@ -95,7 +96,8 @@
   }
 
   .store-tools__tab:hover {
-    background-color: rgb(14, 86, 128);
+    background-color:  rgb(79, 216, 226);
+    color: black;
   }
 
   .store-tools__icon {
