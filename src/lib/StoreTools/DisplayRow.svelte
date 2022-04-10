@@ -11,10 +11,9 @@
     border: 0;
     color: rgb(79, 216, 226);
     font-family: 'Lucida Console', Consolas, monospace;
-    font-size: 0.8rem;
-    line-height: 0.8rem;
-    margin-top: -0.2rem;
-    padding-left: 0.3rem;
+    line-height: 0.8em;
+    margin-top: -0.2em;
+    padding-left: 0.3em;
   }
 
   input:hover {
@@ -24,7 +23,7 @@
   input:focus {
     outline: solid 1px rgb(79, 216, 226);
     border: none;
-    padding: 0.3rem;
+    padding: 0.3em;
   }
 
   select {
@@ -32,18 +31,18 @@
     border: 0;
     color: rgb(226,226,226);
     font-family: 'Lucida Console', Consolas, monospace;
-    padding-left: 0.3rem;
+    padding-left: 0.3em;
   }
   
   select:focus {
     outline: solid 1px rgb(79, 216, 226);
     border: none;
-    padding: 0.3rem;
+    padding: 0.3em;
   }
 
   [contenteditable] {
     background-color: rgb(39, 39, 39);
-    padding-left: 0.3rem;
+    padding-left: 0.3em;
   }
   [contenteditable]:hover {
     border-bottom: dotted 1px rgb(79, 216, 226);
@@ -52,17 +51,16 @@
 
   [contenteditable]:focus {
     outline: solid 1px rgb(79, 216, 226);
-    padding: 0.3rem;
+    padding: 0.3em;
   }
 
   .row {
     display: flex;
     /* border-bottom: solid 1px rgb(60,60,60); */
-    /* padding-left: 1rem; */
-    padding-top: 0.3rem;
-    padding-bottom: 0.2rem;
-    font-size: 0.8rem;
-    line-height: 1.4rem;
+    /* padding-left: 1em; */
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    line-height: 1.4em;
   }
 
   .key {

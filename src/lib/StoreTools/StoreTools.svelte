@@ -70,6 +70,7 @@
     font-family: "Segoe UI", "San Francisco", "Open Sans", Tahoma, Geneva, sans-serif;
     overflow-y: auto;
     padding-top: 10px;
+    font-size: 0.8rem;
   }
 
   .store-tools__wrapper {

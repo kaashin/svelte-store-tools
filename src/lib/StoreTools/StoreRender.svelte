@@ -22,21 +22,7 @@
 <style>
   .render-store {
     font-family: 'Lucida Console', Consolas, monospace;
-    font-size: 0.8rem;
-  }
-  input {
-    background-color: rgb(39, 39, 39);
-    border: 0;
-    color: rgb(226,226,226);
-    font-family: 'Lucida Console', Consolas, monospace;
-  }
-
-  input:hover {
-    background-color: rgb(25,25,25)
-  }
-
-  .render-store p {
-    margin: 0;
+    font-size: 12px;
   }
 </style>
 

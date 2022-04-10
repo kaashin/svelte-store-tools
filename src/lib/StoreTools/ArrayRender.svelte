@@ -12,54 +12,17 @@
 </script>
 
 <style>
-  input {
-    background-color: rgb(39, 39, 39);
-    border: 0;
-    color: rgb(226,226,226);
-    font-family: 'Lucida Console', Consolas, monospace;
-    padding: 0.3rem;
-  }
-
-  input:hover {
-    border: dotted 1px rgb(60,60,60)
-  }
-
-  input:focus {
-    outline: none;
-  }
-
-  select {
-    background-color: rgb(39, 39, 39);
-    border: 0;
-    color: rgb(226,226,226);
-    font-family: 'Lucida Console', Consolas, monospace;
-  }
-  .array {
-    /* padding-left: 1rem; */
-  }
-
-  .pl-1 {
-    padding-left: 1rem;
-  }
-
   .array-content {
-    padding-left: 1rem;
+    padding-left: 1em;
   }
-  .line:hover {
-    background-color: rgb(54, 54, 54);
-  }
-  .property-name {
-    color: rgb(89, 188, 206);
-  }
-
   .array-block {
     display: flex;
-    margin-top:-0.2rem;
-    padding-top: 0.2rem;
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
+    margin-top:-0.2em;
+    padding-top: 0.2em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
     background-color: rgba(60,60,60,1);
-    border-radius: 0.2rem;
+    border-radius: 0.2em;
 
     transition: all 0.2s
   }
@@ -71,13 +34,9 @@
 
   .chevron {
     display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    padding-top: 0.15rem;
-  }
-
-  .init-left-pad {
-    padding-left: 1rem;
+    width: 1em;
+    height: 1em;
+    padding-top: 0.15em;
   }
 
 </style>

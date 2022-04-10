@@ -36,72 +36,14 @@
 </script>
 
 <style>
-  input {
-    background-color: rgb(39, 39, 39);
-    border: 0;
-    color: rgb(226,226,226);
-    font-family: 'Lucida Console', Consolas, monospace;
-    padding: 0.3rem;
-  }
-
-  input:hover {
-    background-color: rgb(25,25,25);
-  }
-
-  input:focus {
-    outline: none;
-  }
-
-  select {
-    background-color: rgb(39, 39, 39);
-    border: 0;
-    color: rgb(226,226,226);
-    font-family: 'Lucida Console', Consolas, monospace;
-  }
-  
-
-  [contenteditable] {
-    background-color: rgb(39, 39, 39);
-    padding: 0.3rem;
-  }
-  [contenteditable]:hover {
-    border: dotted 1px rgb(60,60,60);
-    padding-right: 2rem;
-  }
-
-  [contenteditable]:focus {
-    outline: none;
-  }
-
-  .line {
-    height: 1.25rem;
-    display: flex;
-    align-items: center;
-  }
-  .line:hover {
-    background-color: rgb(54, 54, 54);
-  }
-  .object {
-    width: 100%;
-  }
-
-  .object > div {
-    padding: 0.1rem 0rem;
-    line-height: 1rem;
-  }
-
-  .property-name {
-    color: rgb(89, 188, 206);
-  }
-
   .object-block {
     display: flex;
-    margin-top: -0.2rem;
-    padding-top: 0.2rem;
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
+    margin-top: -0.2em;
+    padding-top: 0.2em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
     background-color: rgba(60,60,60,1);
-    border-radius: 0.2rem;
+    border-radius: 0.2em;
 
     transition: all 0.2s
   }
@@ -113,17 +55,13 @@
 
   .chevron {
     display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    padding-top: 0.15rem;
+    width: 1em;
+    height: 1em;
+    padding-top: 0.15em;
   }
 
   .object-content {
-    padding-left: 1rem;
-  }
-
-  .init-left-pad {
-    padding-left: 1rem;
+    padding-left: 1em;
   }
 
 </style>
