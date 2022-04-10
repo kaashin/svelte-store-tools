@@ -39,6 +39,10 @@
     padding-top: 0.15em;
   }
 
+  .add-item {
+    padding-left: 1rem;
+  }
+
 </style>
 
 <DisplayRow key={key} tabIndex={tabIndex}>
@@ -61,5 +65,12 @@
       <DisplayRow key={key} bind:value={value} tabIndex={tabIndex+1}/>
     {/if}
   {/each}
+</div>
+<div class="add-item">
+  <DisplayRow tabIndex={tabIndex+1} >
+    <div slot="custom">
+      <button on:click={() => {arr = [...arr, 0]}}>Add item</button>
+    </div>
+  </DisplayRow>
 </div>
 {/if}

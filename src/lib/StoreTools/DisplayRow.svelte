@@ -3,6 +3,26 @@
   export let key;
 
   export let tabIndex = 0;
+
+  const initType = typeof value;
+  console.log({initType})
+
+  $: if (initType && (value === null || value === undefined)) {
+    console.log('value is null or undefined');
+    if (initType === 'object') {
+      value = {};
+    } else if (initType === 'object' && Array.isArray(value)) {
+      value = [];
+    } else if (initType === 'string') {
+      value = '';
+    } else if (initType === 'number') {
+      value = 0;
+    } else if (initType === 'boolean') {
+      value = false;
+    } else {
+      value = '';
+    }
+  }
 </script>
 
 <style>
@@ -81,11 +101,7 @@
   {/if}
   {#if $$props.value != null || $$props.value != undefined}
     <span class="value">
-      {#if typeof value === "object" && !value.length}
-        <ObjectRender bind:object={value}/>
-      {:else if typeof value === "array" && !value.length}
-        <ArrayRender bind:arr={value} />
-      {:else if typeof value === "number"}
+      {#if typeof value === "number"}
         <input bind:value={value} type="number" />
       {:else if typeof value === "boolean"}
         <select bind:value={value}>
