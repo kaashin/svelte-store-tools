@@ -1,14 +1,17 @@
 <script>
-  import { slide } from 'svelte/transition'
+  import { slide, fade } from 'svelte/transition'
   import ObjectRender from './ObjectRender.svelte';
   import DisplayRow from './DisplayRow.svelte';
   import Chevron from './Chevron.svelte';
+  import PlusCircle from './PlusCircle.svelte';
+  import Icon from './Icon.svelte';
 
   export let arr;  
   export let open = false;
   export let tabIndex = 0;
   export let key;
 
+  let addItemType = 'string';
 </script>
 
 <style>
@@ -40,9 +43,8 @@
   }
 
   .add-item {
-    padding-left: 1rem;
+    padding-left: 1em;
   }
-
 </style>
 
 <DisplayRow key={key} tabIndex={tabIndex}>
@@ -69,7 +71,32 @@
 <div class="add-item">
   <DisplayRow tabIndex={tabIndex+1} >
     <div slot="custom">
-      <button on:click={() => {arr = [...arr, 0]}}>Add item</button>
+        <select bind:value={addItemType}>
+          <option value="string">String</option>
+          <option value="number">Number</option>
+          <option value="boolean">Boolean</option>
+          <option value="object">Object</option>
+          <option value="array">Array</option>
+        </select>
+        <button on:click={() => {
+          switch(addItemType) {
+            case 'string':
+              arr = [...arr, '']
+              break;
+            case 'number':
+              arr = [...arr, 0]
+              break;
+            case 'boolean':
+              arr = [...arr, false]
+              break;
+            case 'object':
+              arr = [...arr, {}]
+              break;
+            case 'array':
+              arr = [...arr, []]
+              break;
+          }
+        }}>Add Item</button>
     </div>
   </DisplayRow>
 </div>
