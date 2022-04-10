@@ -14,6 +14,7 @@
     font-size: 0.8rem;
     line-height: 0.8rem;
     margin-top: -0.2rem;
+    padding-left: 0.3rem;
   }
 
   input:hover {
@@ -21,8 +22,9 @@
   }
 
   input:focus {
-    border-bottom: dotted 1px rgb(79, 216, 226);
-    outline: none;
+    outline: solid 1px rgb(79, 216, 226);
+    border: none;
+    padding: 0.3rem;
   }
 
   select {
@@ -30,19 +32,27 @@
     border: 0;
     color: rgb(226,226,226);
     font-family: 'Lucida Console', Consolas, monospace;
+    padding-left: 0.3rem;
+  }
+  
+  select:focus {
+    outline: solid 1px rgb(79, 216, 226);
+    border: none;
+    padding: 0.3rem;
   }
 
   [contenteditable] {
     background-color: rgb(39, 39, 39);
+    padding-left: 0.3rem;
   }
   [contenteditable]:hover {
     border-bottom: dotted 1px rgb(79, 216, 226);
-    padding-right: 2rem;
+    
   }
 
   [contenteditable]:focus {
-    outline: none;
-    border-bottom: dotted 1px rgb(79, 216, 226);
+    outline: solid 1px rgb(79, 216, 226);
+    padding: 0.3rem;
   }
 
   .row {

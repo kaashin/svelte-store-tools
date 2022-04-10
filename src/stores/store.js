@@ -23,3 +23,4 @@ export const ObjectStore = writable({
     console.log('show more');
   }
 })
+export const BooleanStore = writable(false);
