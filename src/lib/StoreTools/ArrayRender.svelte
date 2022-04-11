@@ -1,17 +1,18 @@
 <script>
   import { slide, fade } from 'svelte/transition'
+  import { sidebarState } from './store.js'
   import ObjectRender from './ObjectRender.svelte';
   import DisplayRow from './DisplayRow.svelte';
   import Chevron from './Chevron.svelte';
   import PlusCircle from './PlusCircle.svelte';
   import Icon from './Icon.svelte';
+  import Sidebar from './Sidebar.svelte';
+  import AddArrayItem from './AddArrayItem.svelte';
 
   export let arr;  
   export let open = false;
   export let tabIndex = 0;
   export let key;
-
-  let addItemType = 'string';
 </script>
 
 <style>
@@ -45,6 +46,15 @@
   .add-item {
     padding-left: 1em;
   }
+  .add-item-block {
+    display: flex;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .add-item-block:hover {
+    color:rgb(89, 188, 206)
+  }
 </style>
 
 <DisplayRow key={key} tabIndex={tabIndex}>
@@ -59,7 +69,7 @@
 {#if open}
 <div class="array-content" transition:slide={{duration: 200}}>
   {#each arr as value, key}
-    {#if typeof value === "object" && !value.length}
+    {#if typeof value === "object" && !Array.isArray(value)}
       <ObjectRender key={key} bind:object={value} slot="custom" tabIndex={tabIndex+1}/>
     {:else if typeof value === "object" && Array.isArray(value)}
       <svelte:self bind:arr={value} tabIndex={tabIndex+1} key={key} slot="custom"/>
@@ -71,32 +81,23 @@
 <div class="add-item">
   <DisplayRow tabIndex={tabIndex+1} >
     <div slot="custom">
-        <select bind:value={addItemType}>
-          <option value="string">String</option>
-          <option value="number">Number</option>
-          <option value="boolean">Boolean</option>
-          <option value="object">Object</option>
-          <option value="array">Array</option>
-        </select>
-        <button on:click={() => {
-          switch(addItemType) {
-            case 'string':
-              arr = [...arr, '']
-              break;
-            case 'number':
-              arr = [...arr, 0]
-              break;
-            case 'boolean':
-              arr = [...arr, false]
-              break;
-            case 'object':
-              arr = [...arr, {}]
-              break;
-            case 'array':
-              arr = [...arr, []]
-              break;
-          }
-        }}>Add Item</button>
+      <div 
+        class="add-item-block" 
+        on:click={()=>{
+          $sidebarState.isOpen = !$sidebarState.isOpen;
+          $sidebarState.component = AddArrayItem;
+          $sidebarState.props = {
+            arr,
+            updateState: (newArr) => {
+              arr = [...newArr]
+            }
+          };
+        }} 
+        in:fade={{duration: 200}}
+        out:fade={{duration: 50}}
+      >
+        <Icon size="md" icon={PlusCircle} style="padding-right: 0.4em"/> Add Item
+      </div>
     </div>
   </DisplayRow>
 </div>

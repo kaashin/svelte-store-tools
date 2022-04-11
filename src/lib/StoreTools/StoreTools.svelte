@@ -2,8 +2,9 @@
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import { get } from 'svelte/store';
-  import { Stores, ContainerStore } from './store.js'
+  import { Stores, ContainerStore, sidebarState } from './store.js'
   import StoreRender from './StoreRender.svelte';
+  import Sidebar from './Sidebar.svelte';
 
   let height = 500
 
@@ -35,6 +36,11 @@
 
   function setActiveStore(storeId) {
     selectedStoreIndex = $Stores.findIndex(store => store.id === storeId);
+
+    // Reset the sidebar if it is open
+    $sidebarState.isOpen = false;
+    $sidebarState.component = null;
+    $sidebarState.ref = null;
   } 
   
   function resizeMouseDown(e) {
@@ -75,6 +81,7 @@
 
   .store-tools__wrapper {
     display: flex;
+    position: relative;
   }
   .store-tools__tab {
     position: fixed;
@@ -138,6 +145,8 @@
     background-color: rgb(79, 216, 226);
     cursor: row-resize;
   }
+
+  
 </style>
 {#if $ContainerStore.isOpen}
   <div class="store-tools__container" style={`height: ${resizeHandle.prevHeight}px`} transition:fade={{duration: 150}} bind:this={containerEl}>
@@ -168,6 +177,9 @@
           <p>Select a store</p>
         {/if}
       </div>   
+      <Sidebar>
+        hi
+      </Sidebar>
     </div>
   </div>
 {/if}

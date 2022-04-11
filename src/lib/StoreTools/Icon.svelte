@@ -1,5 +1,6 @@
 <script>
   export let size = "sm";
+  export let icon = null;
 </script>
 
 <style>
@@ -16,12 +17,6 @@
     height: 2em;
   }
 
-  .icon {
-    transition: all 0.2s
-  }
-  .icon:hover {
-    color: rgb(89, 188, 206);
-  }
 </style>
 
 <div
@@ -29,6 +24,11 @@
   class:sm={size === "sm"}
   class:md={size === "md"}
   class:lg={size === "lg"}
+  style="{$$props.style ? $$props.style : ""}"
 >
-  <slot></slot>
+  {#if $$props.icon}
+    <svelte:component this={icon} />
+  {:else}
+    <slot></slot>
+  {/if}
 </div>

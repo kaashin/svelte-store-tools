@@ -5,3 +5,8 @@ export const ContainerStore = writable({
   docked: 'bottom',
   isOpen: false
 })
+export const sidebarState = writable({
+  isOpen: false,
+  component: null,
+  ref: null
+});

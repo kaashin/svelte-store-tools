@@ -15,7 +15,6 @@
     }
   }
   
-  $: console.log({$store})
   $: storeType = getStoreType (store);
 </script>
 
