@@ -1,14 +1,19 @@
 <script>
-  import { slide } from 'svelte/transition'
+  import { slide, fade} from 'svelte/transition'
+  import { sidebarState } from './store.js'
   import ArrayRender from './ArrayRender.svelte';
   import DisplayRow from './DisplayRow.svelte';
   import Chevron from './Chevron.svelte';
+  import PlusCircle from './PlusCircle.svelte';
+  import Icon from './Icon.svelte';
+  import AddObjectItem from './AddObjectItem.svelte';
 
   export let object;
   export let open = false;
   export let tabIndex = 0;
   export let key;
 
+  let addingItem = false;
   let displayArr;
 
   function parseObject(obj) {
@@ -64,6 +69,18 @@
     padding-left: 1em;
   }
 
+  .add-item {
+    padding-left: 1em;
+  }
+  .add-item-block {
+    display: flex;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .add-item-block:hover {
+    color:rgb(89, 188, 206)
+  }
 </style>
 
 <DisplayRow key={key} tabIndex={tabIndex}>
@@ -86,5 +103,38 @@
         <DisplayRow key={property.key} bind:value={property.value} tabIndex={tabIndex+1}/>
       {/if}
     {/each}
+  </div>
+  <div class="add-item">
+    <DisplayRow tabIndex={tabIndex+1}>
+      <div slot="custom">
+        {#if addingItem}
+          Adding item {'>>>'}
+        {:else}
+          <div 
+            class="add-item-block" 
+            on:click={()=>{
+              addingItem = true;
+              $sidebarState.isOpen = true;
+              $sidebarState.component = AddObjectItem;
+              $sidebarState.props = {
+                object,
+                updateState: (newObj) => {
+                  addingItem = false;
+                  $sidebarState.isOpen = false;
+                  object = {...newObj};
+                },
+                onClose: (test) => {
+                  addingItem = false;
+                  $sidebarState.isOpen = false;
+                }
+              };
+            }} 
+            in:fade={{duration: 200}}
+            >
+            <Icon size="md" icon={PlusCircle} style="padding-right: 0.4em"/> Add Item
+          </div>
+        {/if}
+      </div>
+    </DisplayRow>
   </div>
 {/if}
