@@ -1,6 +1,6 @@
 <script>
   import { slide, fade} from 'svelte/transition'
-  import { sidebarState } from './store.js'
+  import { sidebarState, detailsHighlightRow } from './store.js'
   import ArrayRender from './ArrayRender.svelte';
   import DisplayRow from './DisplayRow.svelte';
   import Chevron from './Chevron.svelte';
@@ -8,6 +8,7 @@
   import Icon from './Icon.svelte';
   import AddObjectItem from './AddObjectItem.svelte';
 
+  
   export let object;
   export let open = false;
   export let tabIndex = 0;
@@ -121,10 +122,12 @@
                 updateState: (newObj) => {
                   addingItem = false;
                   $sidebarState.isOpen = false;
+                  $detailsHighlightRow = '';
                   object = {...newObj};
                 },
                 onClose: (test) => {
                   addingItem = false;
+                  $detailsHighlightRow = '';
                   $sidebarState.isOpen = false;
                 }
               };
