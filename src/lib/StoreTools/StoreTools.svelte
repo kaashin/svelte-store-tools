@@ -137,6 +137,8 @@
   }
 
   .store-tools__resize-handler {
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 10px;
     transition: all 0.2s ease-in-out;
@@ -158,6 +160,7 @@
       class="store-tools__resize-handler"
       on:mousedown={resizeMouseDown}
     >
+      <div style="width: 100px; height: 2px; border-top: solid 1px rgb(60,60,60); border-bottom: solid 1px rgb(60,60,60); margin: 0 auto;"></div>
     </div>
     <div class="store-tools__wrapper">
       <div class="store-list">
