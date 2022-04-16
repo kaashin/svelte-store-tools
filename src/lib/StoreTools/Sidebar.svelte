@@ -3,7 +3,6 @@
   import { sidebarState } from './store.js';
   
   function handleClose() {
-    console.log('this event was caught')
     $sidebarState.isOpen = false;
     $sidebarState.component = null;
     $sidebarState.ref = null;
@@ -12,10 +11,9 @@
 
 <style>
   .store-tools__sidebar {
-    position: absulute;
     right: 0;
-    min-width: 200px;
-    border: solid 1px rgb(77, 77, 77);
+    min-width: 300px;
+    border-left: solid 1px rgb(60, 60, 60);
     z-index: 10;
   }
 </style>

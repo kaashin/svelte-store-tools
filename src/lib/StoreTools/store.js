@@ -8,5 +8,6 @@ export const ContainerStore = writable({
 export const sidebarState = writable({
   isOpen: false,
   component: null,
-  ref: null
+  ref: null,
 });
+export const detailsHighlightRow = writable('');

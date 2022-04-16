@@ -1,11 +1,19 @@
 <script>
+  import { uid } from 'uid';
+  import { detailsHighlightRow } from './store.js';
+
   export let value;
   export let key;
+  export let allowHighlight = true;
 
   export let tabIndex = 0;
 
   const initType = typeof value;
-  console.log({initType})
+  const id = uid(8)
+  
+  function handleRowClicked() {
+    $detailsHighlightRow = id;
+  }
 
   $: if (initType && (value === null || value === undefined)) {
     console.log('value is null or undefined');
@@ -27,13 +35,12 @@
 
 <style>
   input {
-    background-color: rgb(39, 39, 39);
+    background-color: inherit;
     border: 0;
     color: rgb(79, 216, 226);
     font-family: 'Lucida Console', Consolas, monospace;
     line-height: 0.8em;
     margin-top: -0.2em;
-    padding-left: 0.3em;
   }
 
   input:hover {
@@ -47,7 +54,7 @@
   }
 
   select {
-    background-color: rgb(39, 39, 39);
+    background-color: inherit;
     border: 0;
     color: rgb(226,226,226);
     font-family: 'Lucida Console', Consolas, monospace;
@@ -83,6 +90,11 @@
     line-height: 1.4em;
   }
 
+  .row:hover {
+    background-color: rgb(60, 60, 60);
+    
+  }
+
   .key {
     padding-right: 1ex;
   }
@@ -91,9 +103,12 @@
     color: rgb(79, 216, 226);
   }
 
+  .highlight {
+    background-color: rgb(90, 90, 90);
+  }
 </style>
 
-<div class="row">
+<div class="row" uid={id} on:click={handleRowClicked} class:highlight={allowHighlight && $detailsHighlightRow === id}>
   {#if $$props.key != null || $$props.key != undefined}
     <span class="key">
       {key}:
@@ -117,6 +132,8 @@
         <span>{value}</span>
       {/if}
     </span>
+  {:else if $$props.value === null}
+    <span><i>null</i></span>
   {/if}
   {#if $$slots.custom}
     <slot name="custom" />

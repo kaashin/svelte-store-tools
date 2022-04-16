@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+
   export let props;
 
   const dispatch = createEventDispatcher();
@@ -11,13 +12,13 @@
   function addItem() {
     switch(addItemType) {
       case 'string':
-        arr = [...arr, '']
+        arr = [...arr, newValue]
         break;
       case 'number':
-        arr = [...arr, 0]
+        arr = [...arr, newValue]
         break;
       case 'boolean':
-        arr = [...arr, false]
+        arr = [...arr, newValue]
         break;
       case 'object':
         arr = [...arr, {}]
@@ -28,7 +29,12 @@
     }
 
     props.updateState(arr);
+    props.onClose();
+    dispatch('close');
+  }
 
+  function handleCancel() {
+    props.onClose();
     dispatch('close');
   }
 
@@ -38,11 +44,20 @@
 <style>
   .input {
     display: flex;
-    
+    padding: 0.5em;
+  }
+
+  .input>label {
+    margin-right: 1em;
+  }
+  
+  .container {
+    margin: 1em;
+    width: 300px;
   }
 </style>
 
-<div>
+<div class="container">
   <div class="input">
     <label>Type</label> 
     <select bind:value={addItemType}>
@@ -73,4 +88,5 @@
     </div> 
   {/if}
   <button on:click={addItem}>Add</button>
+  <button on:click={handleCancel}>Cancel</button>
 </div>

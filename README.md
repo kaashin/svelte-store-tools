@@ -4,8 +4,7 @@ A basic development utility designed specifically for Svelte apps that use many 
 
 # Todo
 - Still not loving the styling
-- Remove overflow-x scroll bars
-- Add ability to add items to edit an array length by adding or removing items
+- Ability to removing item from an array
 - Add ability to modify the name of a object property
 - Add ability to add a new object property
 - Change the type and value of a property

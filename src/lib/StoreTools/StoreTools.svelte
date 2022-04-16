@@ -77,11 +77,13 @@
     overflow-y: auto;
     padding-top: 10px;
     font-size: 0.8rem;
+    overflow-x: hidden;
   }
 
   .store-tools__wrapper {
     display: flex;
     position: relative;
+    height: 100%;
   }
   .store-tools__tab {
     position: fixed;
@@ -115,7 +117,7 @@
 
   .store-list {
     min-width: 200px;
-    border: solid 1px rgb(60,60,60);
+    border-right: solid 1px rgb(60,60,60);
   }
   .store-list__item {
     padding: 0.4rem;
@@ -131,6 +133,7 @@
   .store-details {
     width: 100%;
     padding: 0rem 1rem;
+    overflow-x: auto;
   }
 
   .store-tools__resize-handler {
@@ -139,7 +142,8 @@
     transition: all 0.2s ease-in-out;
     position: absolute;
     top: 0;
-    z-index: 100000
+    z-index: 100000;
+    border-bottom: solid 1px rgb(60,60,60);
   }
   .store-tools__resize-handler:hover {
     background-color: rgb(79, 216, 226);

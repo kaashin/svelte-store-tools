@@ -76,7 +76,7 @@
 </DisplayRow>
 
 {#if open}
-  <div class="object-content" transition:slide={{duration: 200}}>
+  <div class="object-content" transition:slide|local={{duration: 200}}>
     {#each displayArr as property}
       {#if typeof property.value === "object" && !property?.value?.length}
         <svelte:self bind:object={property.value} key={property.key} tabIndex={tabIndex+1} slot="custom"/>

@@ -6,13 +6,19 @@
   import Chevron from './Chevron.svelte';
   import PlusCircle from './PlusCircle.svelte';
   import Icon from './Icon.svelte';
-  import Sidebar from './Sidebar.svelte';
   import AddArrayItem from './AddArrayItem.svelte';
 
   export let arr;  
   export let open = false;
   export let tabIndex = 0;
   export let key;
+
+  let addingItem = false;
+
+  $: if (!open) {
+    addingItem = false;
+    $sidebarState.isOpen = false;
+  }
 </script>
 
 <style>
@@ -57,7 +63,7 @@
   }
 </style>
 
-<DisplayRow key={key} tabIndex={tabIndex}>
+<DisplayRow key={key} tabIndex={tabIndex} allowHighlight={false}>
   <div class="array-block" slot="custom" on:click={() => {open = !open}}>
     <span class="chevron">
       <Chevron direction={open ? "down" : "right"}/>
@@ -67,37 +73,51 @@
 </DisplayRow>
 
 {#if open}
-<div class="array-content" transition:slide={{duration: 200}}>
+<div class="array-content" transition:slide|local={{duration: 200}}>
   {#each arr as value, key}
-    {#if typeof value === "object" && !Array.isArray(value)}
-      <ObjectRender key={key} bind:object={value} slot="custom" tabIndex={tabIndex+1}/>
-    {:else if typeof value === "object" && Array.isArray(value)}
-      <svelte:self bind:arr={value} tabIndex={tabIndex+1} key={key} slot="custom"/>
+    {#if value != null || value != undefined}
+      {#if typeof value === "object" && !Array.isArray(value)}
+        <ObjectRender key={key} bind:object={value} slot="custom" tabIndex={tabIndex+1}/>
+      {:else if typeof value === "object" && Array.isArray(value)}
+        <svelte:self bind:arr={value} tabIndex={tabIndex+1} key={key} slot="custom"/>
+      {:else}
+        <DisplayRow key={key} bind:value={value} tabIndex={tabIndex+1}/>
+      {/if}
     {:else}
       <DisplayRow key={key} bind:value={value} tabIndex={tabIndex+1}/>
     {/if}
   {/each}
 </div>
 <div class="add-item">
-  <DisplayRow tabIndex={tabIndex+1} >
+  <DisplayRow tabIndex={tabIndex+1}>
     <div slot="custom">
-      <div 
-        class="add-item-block" 
-        on:click={()=>{
-          $sidebarState.isOpen = !$sidebarState.isOpen;
-          $sidebarState.component = AddArrayItem;
-          $sidebarState.props = {
-            arr,
-            updateState: (newArr) => {
-              arr = [...newArr]
-            }
-          };
-        }} 
-        in:fade={{duration: 200}}
-        out:fade={{duration: 50}}
-      >
-        <Icon size="md" icon={PlusCircle} style="padding-right: 0.4em"/> Add Item
-      </div>
+      {#if addingItem}
+        {arr.length}: Adding item >>>
+      {:else}
+        <div 
+          class="add-item-block" 
+          on:click={()=>{
+            addingItem = true;
+            $sidebarState.isOpen = true;
+            $sidebarState.component = AddArrayItem;
+            $sidebarState.props = {
+              arr,
+              updateState: (newArr) => {
+                addingItem = false;
+                $sidebarState.isOpen = false;
+                arr = [...newArr];
+              },
+              onClose: (test) => {
+                addingItem = false;
+                $sidebarState.isOpen = false;
+              }
+            };
+          }} 
+          in:fade={{duration: 200}}
+          >
+          <Icon size="md" icon={PlusCircle} style="padding-right: 0.4em"/> Add Item
+        </div>
+      {/if}
     </div>
   </DisplayRow>
 </div>
