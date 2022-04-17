@@ -39,6 +39,20 @@ import { writable } from 'svelte/store';
   <button on:click={increment}>Increment</button>
 </div>
 <div>
+  <p>Text Store: {$TextStore}</p>
+</div>
+<div>
+  <p>Boolean Store: {$BooleanStore}</p>
+</div>
+<div>
+  <p>Array Store</p>
+  <ul>
+    {#each $ArrayStore as item}
+      <li>{item}</li>
+    {/each}
+  </ul>
+</div>
+<div>
   <p>Object Store</p>
   <div>
     <label>Name</label>
@@ -58,14 +72,7 @@ import { writable } from 'svelte/store';
     <input bind:value={$ObjectStore.array[1]} type="text" />
     <input bind:value={$ObjectStore.array[2]} type="text" />
   </div>
-  <div>
-    <label>Checking boolean</label>
-    {#if $ObjectStore.boolean}
-      <p>Show red if true</p>
-    {:else}
-      <p>Show green if false</p>
-    {/if}
-  </div>
+  
 </div>
 
 <StoreTools height="50%" />
