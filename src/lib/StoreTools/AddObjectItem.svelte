@@ -25,7 +25,7 @@
       case 'object':
         object = {...object, [propertyName]: {}}
         break;
-      case 'objectay':
+      case 'array':
         object = {...object, [propertyName]: []}
         break;
     }

@@ -13,14 +13,13 @@
   export let tabIndex = 0;
   export let key;
   export let allowDelete = false;
-
-  let addingItem = false;
-
   export let handleDelete = (index) =>  {
     let newArr = [...arr];
     newArr.splice(index, 1)
     arr = [...newArr];
   }
+
+  let addingItem = false;
 
   $: if (!open) {
     addingItem = false;
@@ -84,9 +83,15 @@
   {#each arr as value, key}
     {#if value != null || value != undefined}
       {#if typeof value === "object" && !Array.isArray(value)}
-        <ObjectRender key={key} bind:object={value} slot="custom" tabIndex={tabIndex+1}/>
+        <ObjectRender key={key} bind:object={value} slot="custom" tabIndex={tabIndex+1} allowDelete={true} handleDelete={()=>handleDelete(key)}/>
       {:else if typeof value === "object" && Array.isArray(value)}
-        <svelte:self bind:arr={value} tabIndex={tabIndex+1} key={key} slot="custom" allowDelete={true} handleDelete={()=>handleDelete(key)}/>
+        <svelte:self 
+          bind:arr={value}
+          tabIndex={tabIndex+1} 
+          key={key} slot="custom" 
+          allowDelete={true} 
+          handleDelete={()=>handleDelete(key)}
+        />
       {:else}
         <DisplayRow key={key} bind:value={value} tabIndex={tabIndex+1} allowDelete={true} handleDelete={()=>handleDelete(key)}/>
       {/if}

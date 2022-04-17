@@ -13,6 +13,12 @@
   export let open = false;
   export let tabIndex = 0;
   export let key;
+  export let allowDelete = false; 
+  export let handleDelete = (property) => {
+    const newObj = {...object};
+    delete newObj[property];
+    object = {...newObj};
+  }
 
   let addingItem = false;
   let displayArr;
@@ -88,7 +94,13 @@
   }
 </style>
 
-<DisplayRow key={key} tabIndex={tabIndex} allowHighlight={false}>
+<DisplayRow 
+  key={key} 
+  tabIndex={tabIndex} 
+  allowHighlight={false}
+  {allowDelete}
+  handleDelete={()=>{handleDelete(key)}}
+>
   <div class="object-block" slot="custom" on:click={() => {open = !open}}>
     <span class="chevron">
       <Chevron direction={open ? "down" : "right"}/>
@@ -101,11 +113,25 @@
   <div class="object-content" transition:slide|local={{duration: 200}}>
     {#each displayArr as property}
       {#if typeof property.value === "object" && !property?.value?.length}
-        <svelte:self bind:object={property.value} key={property.key} tabIndex={tabIndex+1} slot="custom"/>
+        <svelte:self 
+          bind:object={property.value} 
+          key={property.key} 
+          tabIndex={tabIndex+1} 
+          slot="custom"
+          allowDelete={true}
+          handleDelete={()=>{handleDelete(property.key)}}
+        />
       {:else if typeof property.value === "object" && Array.isArray(property.value)}
-        <ArrayRender bind:arr={property.value} key={property.key} slot="custom" tabIndex={tabIndex+1}/>
+        <ArrayRender 
+          bind:arr={property.value}
+          key={property.key} 
+          slot="custom" 
+          tabIndex={tabIndex+1} 
+          allowDelete={true} 
+          handleDelete={()=>handleDelete(property.key)}
+          />
       {:else}
-        <DisplayRow key={property.key} bind:value={property.value} tabIndex={tabIndex+1}/>
+        <DisplayRow key={property.key} bind:value={property.value} tabIndex={tabIndex+1} allowDelete={true} handleDelete={()=>handleDelete(property.key)}/>
       {/if}
     {/each}
   </div>
