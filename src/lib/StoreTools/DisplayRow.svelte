@@ -1,15 +1,21 @@
 <script>
   import { uid } from 'uid';
   import { detailsHighlightRow } from './store.js';
+  import Icon from './Icon.svelte';
+  import TrashIcon from './TrashIcon.svelte';
 
   export let value;
   export let key;
   export let allowHighlight = true;
+  export let allowDelete = false;
+  export let handleDelete = ()=>{};
 
   export let tabIndex = 0;
 
   const initType = typeof value;
   const id = uid(8)
+
+  let showRowMenu = false;
   
   function handleRowClicked() {
     $detailsHighlightRow = id;
@@ -105,9 +111,27 @@
   .highlight {
     background-color: rgb(90, 90, 90);
   }
+
+  .row-menu {
+
+  }
+
+  .icon {
+    color: rgb(60,60,60);
+    transition: all 0.1s
+  }
+
+  .icon:hover {
+    color: rgb(79, 216, 226);
+  }
 </style>
 
-<div class="row" uid={id} on:click={handleRowClicked} class:highlight={allowHighlight && $detailsHighlightRow === id}>
+<div 
+  class="row" 
+  uid={id} 
+  on:click={handleRowClicked} 
+  class:highlight={allowHighlight && $detailsHighlightRow === id}
+>
   {#if $$props.key != null || $$props.key != undefined}
     <span class="key">
       {key}:
@@ -137,4 +161,13 @@
   {#if $$slots.custom}
     <slot name="custom" />
   {/if}
+  <div class="row-menu">
+    {#if $$props.allowDelete}
+    <div class="icon" on:click={handleDelete}>
+      <Icon size="md" icon={TrashIcon}>
+  
+      </Icon>
+    </div>
+    {/if}
+  </div>
 </div>

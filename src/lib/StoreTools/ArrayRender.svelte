@@ -12,8 +12,15 @@
   export let open = false;
   export let tabIndex = 0;
   export let key;
+  export let allowDelete = false;
 
   let addingItem = false;
+
+  export let handleDelete = (index) =>  {
+    let newArr = [...arr];
+    newArr.splice(index, 1)
+    arr = [...newArr];
+  }
 
   $: if (!open) {
     addingItem = false;
@@ -63,7 +70,7 @@
   }
 </style>
 
-<DisplayRow key={key} tabIndex={tabIndex} allowHighlight={false}>
+<DisplayRow key={key} tabIndex={tabIndex} allowHighlight={false} {allowDelete} handleDelete={()=>handleDelete(key)}>
   <div class="array-block" slot="custom" on:click={() => {open = !open}}>
     <span class="chevron">
       <Chevron direction={open ? "down" : "right"}/>
@@ -79,12 +86,12 @@
       {#if typeof value === "object" && !Array.isArray(value)}
         <ObjectRender key={key} bind:object={value} slot="custom" tabIndex={tabIndex+1}/>
       {:else if typeof value === "object" && Array.isArray(value)}
-        <svelte:self bind:arr={value} tabIndex={tabIndex+1} key={key} slot="custom"/>
+        <svelte:self bind:arr={value} tabIndex={tabIndex+1} key={key} slot="custom" allowDelete={true} handleDelete={()=>handleDelete(key)}/>
       {:else}
-        <DisplayRow key={key} bind:value={value} tabIndex={tabIndex+1}/>
+        <DisplayRow key={key} bind:value={value} tabIndex={tabIndex+1} allowDelete={true} handleDelete={()=>handleDelete(key)}/>
       {/if}
     {:else}
-      <DisplayRow key={key} bind:value={value} tabIndex={tabIndex+1}/>
+      <DisplayRow key={key} bind:value={value} tabIndex={tabIndex+1} allowDelete={true} handleDelete={()=>handleDelete(key)}/>
     {/if}
   {/each}
 </div>
