@@ -35,3 +35,7 @@ export const register = (name, store) => {
 export const clear = () => {
   Stores.set([])
 }
+
+export const testFunction = () => {
+  return 'hello';
+}
