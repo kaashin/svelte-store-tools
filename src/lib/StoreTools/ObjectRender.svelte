@@ -39,6 +39,10 @@
     object = convertToObject(displayArr)
   }
   
+  $: if (!open) {
+    addingItem = false;
+    $sidebarState.isOpen = false;
+  }
 </script>
 
 <style>
@@ -84,7 +88,7 @@
   }
 </style>
 
-<DisplayRow key={key} tabIndex={tabIndex}>
+<DisplayRow key={key} tabIndex={tabIndex} allowHighlight={false}>
   <div class="object-block" slot="custom" on:click={() => {open = !open}}>
     <span class="chevron">
       <Chevron direction={open ? "down" : "right"}/>
