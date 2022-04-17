@@ -16,7 +16,6 @@
   }
 
   $: if (initType && (value === null || value === undefined)) {
-    console.log('value is null or undefined');
     if (initType === 'object') {
       value = {};
     } else if (initType === 'object' && Array.isArray(value)) {

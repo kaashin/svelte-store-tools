@@ -132,8 +132,12 @@
 
   .store-details {
     width: 100%;
-    padding: 0rem 1rem;
+    padding: 0rem 0rem;
     overflow-x: auto;
+  }
+
+  .store-details__wrapper {
+    padding: 0.5rem 0.5rem;
   }
 
   .store-tools__resize-handler {
@@ -152,7 +156,21 @@
     cursor: row-resize;
   }
 
-  
+  .store-list__title {
+    padding: 0.8em 0.4em;
+    line-height: 1em;
+    font-size: 1em;
+    border-bottom: solid 1px rgb(60,60,60);
+    margin: 0em;
+  }  
+
+  .store-details__title {
+    padding: 0.8em 0.4em;
+    line-height: 1em;
+    font-size: 1em;
+    border-bottom: solid 1px rgb(60,60,60);
+    margin: 0em;
+  }
 </style>
 {#if $ContainerStore.isOpen}
   <div class="store-tools__container" style={`height: ${resizeHandle.prevHeight}px`} transition:fade={{duration: 150}} bind:this={containerEl}>
@@ -164,6 +182,9 @@
     </div>
     <div class="store-tools__wrapper">
       <div class="store-list">
+        <h3 class="store-list__title">
+          Registered Stores
+        </h3>
         {#each $Stores as store, index (store.id)}
           <div 
             class="store-list__item" on:click={()=>setActiveStore(store.id)}
@@ -174,15 +195,20 @@
         {/each}
       </div>
       <div class="store-details">
-        {#if selectedStoreIndex >= 0}
-         {#if $Stores[selectedStoreIndex]?.isValid}
-            <StoreRender store={$Stores[selectedStoreIndex]?.store} />
+        <h3 class="store-details__title">
+          Store Details
+        </h3>
+        <div class="store-details__wrapper">
+          {#if selectedStoreIndex >= 0}
+           {#if $Stores[selectedStoreIndex]?.isValid}
+              <StoreRender store={$Stores[selectedStoreIndex]?.store} />
+            {:else}
+              <span>Error: This doesn't appear to be a valid svelte store</span>
+            {/if}
           {:else}
-            <p>Error: This doesn't appear to be a valid svelte store</p>
+            <span>Select a store</span>
           {/if}
-        {:else}
-          <p>Select a store</p>
-        {/if}
+        </div>
       </div>   
       <Sidebar>
         hi
