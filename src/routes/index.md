@@ -32,6 +32,10 @@ register('Simple Store', SimpleStore);
 
 If you need to clear the stores that have been registered, there is a `clearRegisteredStores` function that can be imported and excuted. For example, in an `onDestroy()` function.
 
+## Examples
+
+Simple Value Store
+![Simple value store](/examples/01-simple-value-store.gif "Simple Value Store")
 
 
 

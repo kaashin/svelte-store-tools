@@ -3,13 +3,14 @@
   import { StoreTools, register, clearRegisteredStores } from '$lib/StoreTools'
   import { onDestroy, onMount } from 'svelte'
   import { writable } from 'svelte/store';
+  import Button from '$lib/StoreTools/Button.svelte'
 
   const badStore = 'this is a bad store';
   const emptyObject = writable({});
   const emptyArray = writable([]);
 
   // On mount, register the stores;
-  register('Simple Store', SimpleStore);
+  register('Simple Value Store', SimpleStore);
   register('Text Store', TextStore);
   register('Boolean Store', BooleanStore);
   register('Array Store', ArrayStore);
@@ -26,16 +27,30 @@
   function increment () {
     $SimpleStore++;
   }
+
+  function decrement () {
+    $SimpleStore--;
+  }
 </script>
 
 <style>
-
+  .container {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem;
+  }
 </style>
 
-<div>
-  SimpleStore Value = {$SimpleStore}
-  <button on:click={increment}>Increment</button>
+<div class="container">
+  <h1>Svelte Store Tools - Examples</h1>
+
+  <h2>Simple Value Store</h2>
+  Store value: {$SimpleStore}
+  <Button on:click={decrement}>-</Button>
+  <Button on:click={increment}>+</Button>
 </div>
+<!-- 
 <div>
   <p>Text Store: {$TextStore}</p>
 </div>
@@ -71,6 +86,6 @@
     <input bind:value={$ObjectStore.array[2]} type="text" />
   </div>
   
-</div>
+</div> -->
 
 <StoreTools />
