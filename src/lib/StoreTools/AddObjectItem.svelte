@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import Button from './Button.svelte';
 
   export let props;
 
@@ -45,11 +46,18 @@
 <style>
   .input {
     display: flex;
-    padding: 0.5em;
+    flex-direction: column;
+    padding-bottom: 0.5em;
   }
 
   .input>label {
-    margin-right: 1em;
+    margin-bottom: 0.3em;
+    font-size: 0.9em;
+    text-transform: uppercase;
+  }
+
+  .input>input {
+    height: 1rem;
   }
   
   .container {
@@ -106,7 +114,7 @@
         </select>
       </div> 
     {/if}
-    <button on:click={addItem}>Add</button>
-    <button on:click={handleCancel}>Cancel</button>
+    <Button on:click={addItem}>Add</Button>
+    <Button on:click={handleCancel}>Cancel</Button>
   </div>
 </div>
