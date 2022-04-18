@@ -13,4 +13,4 @@ This a tool for development only.
 
 ### Contributing
 
-Sure. Be nkind. I'm new to this!
+Sure. Be kind. I'm new to this!
