@@ -31,7 +31,7 @@
   {:else if storeType === "array"}
     <ArrayRender bind:arr={$store} />    
   {:else}
-    <DisplayRow key="Value" bind:value={$store}/>
+    <DisplayRow key="Value" bind:value={$store}  allowHighlight={false}/>
   {/if}
 </div>
 

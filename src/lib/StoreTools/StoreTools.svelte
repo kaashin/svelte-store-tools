@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import { get } from 'svelte/store';
-  import { Stores, ContainerStore, sidebarState } from './store.js'
+  import { Stores, ContainerStore, sidebarState, detailsHighlightRow} from './store.js'
   import StoreRender from './StoreRender.svelte';
   import Sidebar from './Sidebar.svelte';
 
@@ -26,8 +26,6 @@
       resizeHandle.yDistance = 0;
       window.removeEventListener('mousemove', resizeMouseMove);
     })
-
-    // window.addEventListener('mousemove', resizeMouseMove);
   })
 
   function toggleOpen() {
@@ -172,6 +170,7 @@
     margin: 0em;
   }
 </style>
+
 {#if $ContainerStore.isOpen}
   <div class="store-tools__container" style={`height: ${resizeHandle.prevHeight}px`} transition:fade={{duration: 150}} bind:this={containerEl}>
     <div 
