@@ -14,10 +14,15 @@
   export let tabIndex = 0;
   export let key;
   export let allowDelete = false; 
+  export let parentDelete = () => {}
   export let handleDelete = (property) => {
-    const newObj = {...object};
-    delete newObj[property];
-    object = {...newObj};
+    try {
+      const newObj = {...object};
+      delete newObj[property];
+      object = {...newObj};
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   let addingItem = false;
@@ -99,7 +104,7 @@
   tabIndex={tabIndex} 
   allowHighlight={false}
   {allowDelete}
-  handleDelete={()=>{handleDelete(key)}}
+  handleDelete={()=>parentDelete(key)}
 >
   <div class="object-block" slot="custom" on:click={() => {open = !open}}>
     <span class="chevron">
@@ -128,7 +133,7 @@
           slot="custom" 
           tabIndex={tabIndex+1} 
           allowDelete={true} 
-          handleDelete={()=>handleDelete(property.key)}
+          parentDelete={()=>handleDelete(key)}
           />
       {:else}
         <DisplayRow key={property.key} bind:value={property.value} tabIndex={tabIndex+1} allowDelete={true} handleDelete={()=>handleDelete(property.key)}/>
