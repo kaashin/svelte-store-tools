@@ -13,6 +13,9 @@
   export let tabIndex = 0;
   export let key;
   export let allowDelete = false;
+  export let parentDelete = () => {
+
+  }
   export let handleDelete = (index) =>  {
     let newArr = [...arr];
     newArr.splice(index, 1)
@@ -69,7 +72,7 @@
   }
 </style>
 
-<DisplayRow key={key} tabIndex={tabIndex} allowHighlight={false} {allowDelete} handleDelete={()=>handleDelete(key)}>
+<DisplayRow key={key} tabIndex={tabIndex} allowHighlight={false} {allowDelete} handleDelete={()=>parentDelete(key)}>
   <div class="array-block" slot="custom" on:click={() => {open = !open}}>
     <span class="chevron">
       <Chevron direction={open ? "down" : "right"}/>
@@ -90,7 +93,7 @@
           tabIndex={tabIndex+1} 
           key={key} slot="custom" 
           allowDelete={true} 
-          handleDelete={()=>handleDelete(key)}
+          parentDelete={()=>handleDelete(key)}
         />
       {:else}
         <DisplayRow key={key} bind:value={value} tabIndex={tabIndex+1} allowDelete={true} handleDelete={()=>handleDelete(key)}/>
