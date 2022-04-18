@@ -1,28 +1,26 @@
 <script>
   import { SimpleStore, ObjectStore, ArrayStore , TextStore, NestedArrayStore, BooleanStore} from '$stores/store.js'
-  import { StoreTools, register, clear } from '$lib/StoreTools'
+  import { StoreTools, register, clearRegisteredStores } from '$lib/StoreTools'
   import { onDestroy, onMount } from 'svelte'
-import { writable } from 'svelte/store';
+  import { writable } from 'svelte/store';
 
   const badStore = 'this is a bad store';
   const emptyObject = writable({});
   const emptyArray = writable([]);
 
   // On mount, register the stores;
-  onMount(() => {
-    register('Simple Store', SimpleStore);
-    register('Text Store', TextStore);
-    register('Boolean Store', BooleanStore);
-    register('Array Store', ArrayStore);
-    register('Nested Array Store', NestedArrayStore);
-    register('Object Store', ObjectStore);
-    register('Bad Store', badStore);
-    register('Empty Object', emptyObject);
-    register('Empty Array', emptyArray);
-  })
+  register('Simple Store', SimpleStore);
+  register('Text Store', TextStore);
+  register('Boolean Store', BooleanStore);
+  register('Array Store', ArrayStore);
+  register('Nested Array Store', NestedArrayStore);
+  register('Object Store', ObjectStore);
+  register('Bad Store', badStore);
+  register('Empty Object', emptyObject);
+  register('Empty Array', emptyArray);
 
   onDestroy(() => {
-    clear();
+    clearRegisteredStores();
   });
 
   function increment () {
@@ -75,4 +73,4 @@ import { writable } from 'svelte/store';
   
 </div>
 
-<StoreTools height="50%" />
+<StoreTools />

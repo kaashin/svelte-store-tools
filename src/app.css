@@ -1,4 +1,15 @@
 body, html {
   margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url("fonts/poppins/Poppins-Medium.ttf");
+  font-weight: 500;
 }

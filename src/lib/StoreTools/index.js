@@ -1,8 +1,8 @@
 import StoreTools from './StoreTools.svelte';
-import { register, clear } from './tools.js'
+import { register, clearRegisteredStores } from './tools.js'
 
 export {
   StoreTools,
   register,
-  clear
+  clearRegisteredStores
 }

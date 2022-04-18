@@ -32,7 +32,7 @@ export const register = (name, store) => {
   }
 }
 
-export const clear = () => {
+export const clearRegisteredStores = () => {
   Stores.set([])
 }
 

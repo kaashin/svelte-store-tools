@@ -1,8 +1,18 @@
 import adapter from '@sveltejs/adapter-auto';
 import path from 'path';
+import { mdsvex } from "mdsvex";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
+	extensions: ['.svelte', '.md', '.svx'],
+	preprocess: [
+		mdsvex({
+			extensions: ['.md', '.sdx'],
+			layout: {
+				_: "./src/routes/__layout.svelte",
+			}
+		})
+	],
 	kit: {
 		adapter: adapter(),
 		vite: {
