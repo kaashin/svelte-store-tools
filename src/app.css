@@ -8,6 +8,15 @@ h1 {
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: rgb(89, 188, 206);
+}
+
+a:visited {
+  color: rgb(89, 188, 206)
+}
+
 @font-face {
   font-family: Poppins;
   src: url("fonts/poppins/Poppins-Medium.ttf");

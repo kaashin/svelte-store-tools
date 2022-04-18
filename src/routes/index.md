@@ -2,6 +2,8 @@
 
 A simple dev tool to help you debug your Svelte stores.
 
+[Repository](https://github.com/kaashin/svelte-store-tools)
+
 ## Install
 
 Install the `svelte-store-tools` package.
