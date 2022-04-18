@@ -17,6 +17,7 @@
     yDistance: 0,
     prevHeight: height,
   }
+  let nodeEnv = process.env.NODE_ENV;
 
   onMount(() => {
     window.addEventListener('mouseup', () => {
@@ -171,7 +172,7 @@
   }
 </style>
 
-{#if $ContainerStore.isOpen}
+{#if $ContainerStore.isOpen && nodeEnv === 'development'}
   <div class="store-tools__container" style={`height: ${resizeHandle.prevHeight}px`} transition:fade={{duration: 150}} bind:this={containerEl}>
     <div 
       class="store-tools__resize-handler"
