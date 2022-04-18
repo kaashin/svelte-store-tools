@@ -8,6 +8,9 @@ A simple development utility for Svelte apps that use svelte stores. This tool p
 - Change the type of a property or array item.
 - Validation on the form inputs when adding new items to Arrays or Objects
 
-### Random thoughts
-- Is there a way to determine how many subscribers there are to a store?
-- Is there a way to record history of changes to the store?
+### Other Notes
+This a tool for development only.
+
+### Contributing
+
+Sure. Be nkind. I'm new to this!
