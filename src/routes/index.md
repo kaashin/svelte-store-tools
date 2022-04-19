@@ -28,19 +28,19 @@ npm install svelte-store-tools
 ## Use It
 
 In your svelte-kit route, import the `StoreTools` component and `register` from `svelte-store-tools`
-```
+```javascript
 import { StoreTools } from 'svelte-store-tools';
 ```
 
 Add the component
 
-```
+```javascript
 <StoreTools />
 ```
 
 Register the stores that you want to be able to debug when in development. First parameter is the name of the store that will be displayed in the dev tool, followed by a reference to the Svelte store.
 
-```
+```javascript
 register('Simple Store', SimpleStore);
 ```
 
