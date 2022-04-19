@@ -8,7 +8,7 @@ specifiers:
   prettier: ^2.5.1
   prettier-plugin-svelte: ^2.5.0
   svelte: ^3.44.0
-  svelte-store-tools: 0.0.12
+  svelte-store-tools: 0.0.13
   svelte2tsx: ^0.5.6
   typescript: ^4.6.3
   uid: ^2.0.0
@@ -17,7 +17,7 @@ specifiers:
 
 dependencies:
   lodash: 4.17.21
-  svelte-store-tools: 0.0.12
+  svelte-store-tools: 0.0.13
   uid: 2.0.0
 
 devDependencies:
@@ -610,8 +610,8 @@ packages:
       svelte: 3.46.4
     dev: true
 
-  /svelte-store-tools/0.0.12:
-    resolution: {integrity: sha512-ja52wwEcujXHwnJVWSuMQaGf0YaBoaGS024s82tQfUyNbDGb4vOC5Ou5voxCUO4B7JD0D5r/77AmsvMf9KIcMg==}
+  /svelte-store-tools/0.0.13:
+    resolution: {integrity: sha512-DArWwq9hNty2XDuYQY/R4dkUAxPDEcivzjh4BK8ndo5DsVQFrkgTZMX0J21Byl7qYcimWF21/CoHlzhlYc6rbA==}
     dependencies:
       lodash: 4.17.21
       uid: 2.0.0
