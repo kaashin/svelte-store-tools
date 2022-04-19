@@ -1,3 +1,13 @@
+<script>
+  import Examples from './../components/Examples.svelte';
+</script>
+
+<style>
+  iframe {
+    border: solid 1px rgb(45,45,45);
+  }
+</style>
+
 # Svelte Store Tools
 
 A simple dev tool to help you debug your Svelte stores.
@@ -34,8 +44,12 @@ If you need to clear the stores that have been registered, there is a `clearRegi
 
 ## Examples
 
-Simple Value Store
-![Simple value store](/examples/01-simple-value-store.gif "Simple Value Store")
+### Simple Value Store
+<iframe src="/examples/simple-value-store" height=300/>
+
+### Array Store
+<iframe src="/examples/array-store" height=300 />
+
 
 
 

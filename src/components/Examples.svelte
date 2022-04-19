@@ -35,10 +35,8 @@
 
 <style>
   .container {
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 2rem;
+    position: relative;
+    width: 100%;
   }
 
   hr {
@@ -48,8 +46,6 @@
 </style>
 
 <div class="container">
-  <h1>Svelte Store Tools - Examples</h1>
-
   <h2>Simple Value Store</h2>
   Store value: {$SimpleStore}
   <Button on:click={decrement}>-</Button>
@@ -57,6 +53,7 @@
   <hr/>
   <h2>Array Store</h2>
   
+  <StoreTools allowInProduction={true}/>
 </div>
 <!-- 
 <div>
@@ -96,4 +93,3 @@
   
 </div> -->
 
-<StoreTools />
