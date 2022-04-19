@@ -14,6 +14,10 @@ A simple dev tool to help you debug your Svelte stores.
 
 [Repository](https://github.com/kaashin/svelte-store-tools)
 
+## Details
+
+This dev tool is intended to help with inspecting and debugging Svelte stores by showing the data that is contained in the store as they are modified. You can also modify the data in the stores and see your app update with the new data. 
+
 ## Install
 
 Install the `svelte-store-tools` package.
