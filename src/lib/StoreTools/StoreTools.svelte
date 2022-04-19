@@ -6,7 +6,8 @@
   import StoreRender from './StoreRender.svelte';
   import Sidebar from './Sidebar.svelte';
 
-  let height = 500
+  export let allowInProduction = false;
+  export let height = 150;
 
   let selectedStoreIndex;
   let containerEl;
@@ -77,6 +78,7 @@
     padding-top: 10px;
     font-size: 0.8rem;
     overflow-x: hidden;
+    border-top: solid 1px rgb(60,60,60);
   }
 
   .store-tools__wrapper {
@@ -172,11 +174,11 @@
   }
 </style>
 
-{#if $ContainerStore.isOpen && nodeEnv === 'development'}
+{#if $ContainerStore.isOpen && (nodeEnv === 'development' || allowInProduction)}
   <div class="store-tools__container" style={`height: ${resizeHandle.prevHeight}px`} transition:fade={{duration: 150}} bind:this={containerEl}>
     <div 
-      class="store-tools__resize-handler"
-      on:mousedown={resizeMouseDown}
+    class="store-tools__resize-handler"
+    on:mousedown={resizeMouseDown}
     >
       <div style="width: 100px; height: 2px; border-top: solid 1px rgb(60,60,60); border-bottom: solid 1px rgb(60,60,60); margin: 0 auto;"></div>
     </div>
