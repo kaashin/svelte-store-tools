@@ -85,6 +85,7 @@
     display: flex;
     position: relative;
     height: 100%;
+    border-top: solid 1px rgb(60,60,60);
   }
   .store-tools__tab {
     position: fixed;
@@ -176,12 +177,14 @@
 
 {#if $ContainerStore.isOpen && (nodeEnv === 'development' || allowInProduction)}
   <div class="store-tools__container" style={`height: ${resizeHandle.prevHeight}px`} transition:fade={{duration: 150}} bind:this={containerEl}>
-    <div 
-    class="store-tools__resize-handler"
-    on:mousedown={resizeMouseDown}
-    >
-      <div style="width: 100px; height: 2px; border-top: solid 1px rgb(60,60,60); border-bottom: solid 1px rgb(60,60,60); margin: 0 auto;"></div>
-    </div>
+    {#if !$$props.height}
+      <div 
+      class="store-tools__resize-handler"
+      on:mousedown={resizeMouseDown}
+      >
+        <div style="width: 100px; height: 2px; border-top: solid 1px rgb(60,60,60); border-bottom: solid 1px rgb(60,60,60); margin: 0 auto;"></div>
+      </div>
+    {/if}
     <div class="store-tools__wrapper">
       <div class="store-list">
         <h3 class="store-list__title">
