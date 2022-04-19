@@ -19,6 +19,6 @@ a:visited {
 
 @font-face {
   font-family: Poppins;
-  src: url("fonts/poppins/Poppins-Medium.ttf");
+  src: url("/fonts/poppins/Poppins-Medium.ttf");
   font-weight: 500;
 }
