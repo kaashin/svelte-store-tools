@@ -18,7 +18,11 @@
     yDistance: 0,
     prevHeight: height,
   }
-  let nodeEnv = process.env.NODE_ENV;
+  
+  let nodeEnv;
+  if (process) {
+    nodeEnv = process.env.NODE_ENV;
+  }
 
   onMount(() => {
     window.addEventListener('mouseup', () => {
