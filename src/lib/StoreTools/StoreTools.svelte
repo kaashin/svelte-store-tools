@@ -19,9 +19,9 @@
     prevHeight: height,
   }
   
-  let nodeEnv;
+  let envMode;
   if (import.meta && import.meta.env && import.meta.env.MODE) {
-    nodeEnv = import.meta.env.MODE;
+    envMode = import.meta.env.MODE;
   }
   
   onMount(() => {
