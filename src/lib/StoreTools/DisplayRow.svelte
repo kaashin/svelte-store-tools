@@ -7,10 +7,8 @@
   export let value;
   export let key;
   export let allowHighlight = true;
-  export let allowDelete = false;
+  export const allowDelete = false;
   export let handleDelete = ()=>{};
-
-  export let tabIndex = 0;
 
   const initType = typeof value;
   const id = uid(8)
