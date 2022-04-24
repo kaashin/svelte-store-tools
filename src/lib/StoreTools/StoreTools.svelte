@@ -19,10 +19,7 @@
     prevHeight: height,
   }
   
-  let nodeEnv = null;
-  if (process) {
-    nodeEnv = process.env.NODE_ENV;
-  }
+  let envMode = import.meta.env.MODE;
   
   onMount(() => {
     window.addEventListener('mouseup', () => {
@@ -179,7 +176,7 @@
   }
 </style>
 
-{#if $ContainerStore.isOpen && (nodeEnv === 'development' || allowInProduction)}
+{#if $ContainerStore.isOpen && (envMode === 'development' || allowInProduction)}
   <div class="store-tools__container" style={`height: ${resizeHandle.prevHeight}px`} transition:fade={{duration: 150}} bind:this={containerEl}>
     {#if !$$props.height}
       <div 
