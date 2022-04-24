@@ -46,6 +46,13 @@ register('Simple Store', SimpleStore);
 
 If you need to clear the stores that have been registered, there is a `clearRegisteredStores` function that can be imported and excuted. For example, in an `onDestroy()` function.
 
+## Props
+
+The following props can be passed to the `StoreTools` component
+
+* `allowInProduction` - A modifier to allow this tool to bypass the environment check and be used in production environment. Note: this is required to use this in a REPL.
+* `height` - Specify the initial height of the dev panel. 
+
 ## Examples
 
 ### Simple Value Store
