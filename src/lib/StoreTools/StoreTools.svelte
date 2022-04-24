@@ -19,7 +19,10 @@
     prevHeight: height,
   }
   
-  let envMode = import.meta.env.MODE;
+  let nodeEnv;
+  if (import.meta && import.meta.env && import.meta.env.MODE) {
+    nodeEnv = import.meta.env.MODE;
+  }
   
   onMount(() => {
     window.addEventListener('mouseup', () => {
