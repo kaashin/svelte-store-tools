@@ -82,12 +82,12 @@
   </h3>
   <div class="content">
     <div class="input">
-      <label>Property name</label>  
-      <input type="text" bind:value={propertyName} />
+      <label for="propertyName">Property name</label>  
+      <input name="propertyName" type="text" bind:value={propertyName} />
     </div>
     <div class="input">
-      <label>Type</label> 
-      <select bind:value={addItemType}>
+      <label for="itemType">Type</label> 
+      <select name="itemType" bind:value={addItemType}>
         <option value="string">String</option>
         <option value="number">Number</option>
         <option value="boolean">Boolean</option>
@@ -97,18 +97,18 @@
     </div>
     {#if addItemType === 'string'}
       <div class="input">
-        <label>Value </label>
-        <input type="text" bind:value={newValue} />
+        <label for="value">Value </label>
+        <input name="value" type="text" bind:value={newValue} />
       </div>  
     {:else if addItemType === 'number'}
       <div class="input">
-        <label>Value </label>
-        <input type="number" bind:value={newValue} />
+        <label for="numberValue">Value </label>
+        <input name="numberValue" type="number" bind:value={newValue} />
       </div>  
     {:else if addItemType === 'boolean'}
       <div class="input">
-        <label>Value </label>
-        <select bind:value={newValue}>
+        <label for="booleanValue">Value </label>
+        <select name="booleanValue" bind:value={newValue}>
           <option value={true}>true</option>
           <option value={false}>false</option>
         </select>
