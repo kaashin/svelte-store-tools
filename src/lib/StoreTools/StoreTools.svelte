@@ -176,7 +176,7 @@
   }
 </style>
 
-{#if $ContainerStore.isOpen && (envMode === 'development' || allowInProduction)}
+{#if $ContainerStore.isOpen && ((envMode && envMode === 'development') || allowInProduction)}
   <div class="store-tools__container" style={`height: ${resizeHandle.prevHeight}px`} transition:fade={{duration: 150}} bind:this={containerEl}>
     {#if !$$props.height}
       <div 
