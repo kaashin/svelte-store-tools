@@ -19,11 +19,11 @@
     prevHeight: height,
   }
   
-  let nodeEnv;
+  let nodeEnv = null;
   if (process) {
     nodeEnv = process.env.NODE_ENV;
   }
-
+  
   onMount(() => {
     window.addEventListener('mouseup', () => {
       resizeHandle.isMouseDown = false;
