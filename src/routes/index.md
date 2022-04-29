@@ -12,7 +12,8 @@
 
 A simple dev tool to help you debug your Svelte stores.
 
-[Repository](https://github.com/kaashin/svelte-store-tools)
+* [Repository](https://github.com/kaashin/svelte-store-tools)
+* [Repl](https://svelte.dev/repl/cdacfd20e2004ce6a933023e38ea41c0?version=3.47.0)
 
 ## Details
 
