@@ -122,7 +122,7 @@
           bind:object={property.value} 
           key={property.key} 
           tabIndex={tabIndex+1} 
-          slot="custom"
+          
           allowDelete={true}
           handleDelete={()=>{handleDelete(property.key)}}
         />
@@ -130,7 +130,7 @@
         <ArrayRender 
           bind:arr={property.value}
           key={property.key} 
-          slot="custom" 
+          
           tabIndex={tabIndex+1} 
           allowDelete={true} 
           parentDelete={()=>handleDelete(key)}

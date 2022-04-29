@@ -91,7 +91,6 @@
         <ObjectRender 
           key={key} 
           bind:object={value} 
-          slot="custom" 
           tabIndex={tabIndex+1} 
           allowDelete={true} 
           parentDelete={()=>handleDelete(key)}
@@ -100,7 +99,7 @@
         <svelte:self 
           bind:arr={value}
           tabIndex={tabIndex+1} 
-          key={key} slot="custom" 
+          key={key}
           allowDelete={true} 
           parentDelete={()=>handleDelete(key)}
         />
