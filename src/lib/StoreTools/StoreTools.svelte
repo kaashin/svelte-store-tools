@@ -5,9 +5,11 @@
   import { Stores, ContainerStore, sidebarState, detailsHighlightRow} from './store.js'
   import StoreRender from './StoreRender.svelte';
   import Sidebar from './Sidebar.svelte';
+  import { dev } from '$app/env';
 
   export let allowInProduction = false;
   export let height = 150;
+  export let envMode = dev;
 
   let selectedStoreIndex;
   let containerEl;
@@ -18,12 +20,7 @@
     yDistance: 0,
     prevHeight: height,
   }
-  
-  let envMode;
-  if (import.meta && import.meta.env && import.meta.env.MODE) {
-    envMode = import.meta.env.MODE;
-  }
-  
+   
   onMount(() => {
     window.addEventListener('mouseup', () => {
       resizeHandle.isMouseDown = false;
